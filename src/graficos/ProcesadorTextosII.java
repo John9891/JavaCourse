@@ -48,44 +48,57 @@ class LaminaProcesadorII extends JPanel{
 		BarraMenu1.add(MenuEstilo);
 		BarraMenu1.add(MenuTamagno);
 		
-		ConfiguraMenu("Arial", "tipo", "Arial", 10, 10);
-		ConfiguraMenu("Verdana", "tipo", "Verdana", 10, 10);
-		ConfiguraMenu("Courier", "tipo", "Courier", 10, 10);
-		ConfiguraMenu("Times New Roman", "tipo", "Times New Roman", 10, 10);
+		ConfiguraMenu("Arial", "tipo", "Arial", 10, 10,"");
+		ConfiguraMenu("Verdana", "tipo", "Verdana", 10, 10,"");
+		ConfiguraMenu("Courier", "tipo", "Courier", 10, 10,"");
+		ConfiguraMenu("Times New Roman", "tipo", "Times New Roman", 10, 10,"");
 		//*****************************************************************************
-		ConfiguraMenu("Negrita", "estilo", "", Font.BOLD, 0);
-		ConfiguraMenu("Cursiva", "estilo", "", Font.ITALIC, 0);
-		ConfiguraMenu("Normal", "estilo", "", 0, 0);
+		ConfMenuEstilo("Negrita", "src/graficos/negrita.jpg", new StyledEditorKit.BoldAction(),KeyEvent.VK_B);
+		ConfMenuEstilo("Cursiva", "src/graficos/cursiva.jpg", new StyledEditorKit.ItalicAction(),KeyEvent.VK_K);				
 		//*****************************************************************************
-		ConfiguraMenu("10", "tamagno", "", 0, 10);
-		ConfiguraMenu("14", "tamagno", "", 0, 14);
-		ConfiguraMenu("18", "tamagno", "", 0, 18);
-		ConfiguraMenu("24", "tamagno", "", 0, 24);		
+		ButtonGroup grupoTamagno = new ButtonGroup();
+		ConfMenuTam("10", 10,grupoTamagno,KeyEvent.VK_A);
+		ConfMenuTam("14", 14,grupoTamagno,KeyEvent.VK_E);
+		ConfMenuTam("18", 18,grupoTamagno,KeyEvent.VK_F);
+		ConfMenuTam("24", 24,grupoTamagno,KeyEvent.VK_D);			
 		
 		Area1 = new JTextPane();		
-		add(Area1);					
+		add(Area1);			
 		
+		JPopupMenu Emergente = new JPopupMenu();
+		JMenuItem NegritaE = new JMenuItem("Negrita");
+		JMenuItem CursivaE = new JMenuItem("Cursiva");		
+		Emergente.add(NegritaE);
+		Emergente.add(CursivaE);		
+		Area1.setComponentPopupMenu(Emergente);
+		NegritaE.addActionListener(new StyledEditorKit.BoldAction());
+		CursivaE.addActionListener(new StyledEditorKit.ItalicAction());	
 	}
 	
-	public void ConfiguraMenu(String rotulo, String menu, String tipo_letra, int estilo, int tamagno){
+	public void ConfMenuEstilo(String rotulo, String icono, ActionListener oyente, int atajo){
+		JCheckBoxMenuItem elemento = new JCheckBoxMenuItem("Negrita",new ImageIcon(icono));
+		MenuEstilo.add(elemento);
+		elemento.addActionListener(oyente);
+		elemento.setAccelerator(KeyStroke.getKeyStroke(atajo, InputEvent.CTRL_DOWN_MASK));
+	}
+	
+	public void ConfMenuTam(String rotulo, int tamagno, ButtonGroup grupo, int atajo){		
+		JRadioButtonMenuItem elemento = new JRadioButtonMenuItem(rotulo);
+		grupo.add(elemento);
+		MenuTamagno.add(elemento);
+		elemento.addActionListener(new StyledEditorKit.FontSizeAction("", tamagno));
+		elemento.setAccelerator(KeyStroke.getKeyStroke(atajo, InputEvent.CTRL_DOWN_MASK));
+	}
+	
+	public void ConfiguraMenu(String rotulo, String menu, String tipo_letra, int estilo, int tamagno, String rutaIcon){
 		
-		JMenuItem elemento = new JMenuItem(rotulo);
+		JMenuItem elemento = new JMenuItem(rotulo, new ImageIcon(rutaIcon));
 		switch(menu){
 		case("tipo"):
 			MenuTipo.add(elemento);
 			elemento.addActionListener(new StyledEditorKit.FontFamilyAction("", tipo_letra));		
 		break;
-		case("estilo"):
-			MenuEstilo.add(elemento);
-			if(estilo==Font.BOLD){
-				elemento.addActionListener(new StyledEditorKit.BoldAction());}
-			else if(estilo==Font.ITALIC){
-				elemento.addActionListener(new StyledEditorKit.ItalicAction());}			
-		break;
-		case("tamagno"):
-			MenuTamagno.add(elemento);
-			elemento.addActionListener(new StyledEditorKit.FontSizeAction("", tamagno));
-		break;}			
+		}		
 		
 	}	
 	

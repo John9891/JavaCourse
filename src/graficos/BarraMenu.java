@@ -1,10 +1,12 @@
 package graficos;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 public class BarraMenu {
 
@@ -40,10 +42,11 @@ class LaminaMenu extends JPanel{
 		JMenuItem Item2menuArchivo = new JMenuItem("Abrir archivo");
 		JMenuItem Item3menuArchivo = new JMenuItem("Opciones");
 		JMenuItem Item4menuArchivo = new JMenuItem("Salir");
-		JMenuItem Item1menuEdicion = new JMenuItem("Copiar");
-		JMenuItem Item2menuEdicion = new JMenuItem("Pegar");
-		JMenuItem Item3menuEdicion = new JMenuItem("Seleccionar todo");
-		JMenuItem Item4menuEdicion = new JMenuItem("Arrastrar");
+		JMenuItem Item1menuEdicion = new JMenuItem("Copiar", new ImageIcon("src/graficos/copiar.gif"));
+		JMenuItem Item2menuEdicion = new JMenuItem("Pegar", new ImageIcon("src/graficos/pegar.gif"));
+		JMenuItem Item3menuEdicion = new JMenuItem("Cortar", new ImageIcon("src/graficos/cortar.gif"));
+		JMenuItem Item4menuEdicion = new JMenuItem("Seleccionar todo", new ImageIcon("src/graficos/selTodo.png"));
+		//Item4menuEdicion.setHorizontalTextPosition(SwingConstants.LEFT); //Coloca texto a la izquierda de imagen
 		JMenuItem Item1menuOpciones = new JMenuItem("Atras");
 		JMenuItem Item2menuOpciones = new JMenuItem("Adelante");
 				
