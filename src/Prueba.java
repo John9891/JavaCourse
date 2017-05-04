@@ -3,31 +3,37 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 
-public class Prueba {
+public class Prueba {	
 	
+	public static void main(String[] args) throws Exception{		
+		
+		int num = 4;
+		long resultado = sumaFibonacci(num);
+		System.out.println("La suma de los primeros " + num + " numeros es " + resultado);
+				
+	}
 	
-	public static void main(String[] args) throws IOException {		
+	static long sumaFibonacci (int n){
 		
-		final int NUM = 10;
-		BufferedReader entrada = new BufferedReader(
-		new InputStreamReader(System.in));
-		int nums[]= new int[NUM];
-		int total = 1;
-		System.out.println("Por favor, introduzca " + NUM + " datos");
-		for (int i = 0; i < NUM; i++)
-		{
-		nums[i] = Integer.parseInt(entrada.readLine());
+		if(n==1){
+			return 1;
+		}	
+	else{
+		int inf = 0;
+		int sup = 1;
+		int x;
+		for(int i=2; i<=n; i++){
+			x=inf;
+			inf=sup;
+			sup=x+inf;
+		}		
+		return sup;
 		}
-		System.out.print("\nLista de números: ");
-		for (int i = 0; i < NUM; i++)
-		{
-		System.out.print(" " + nums[i]);
-		total *= nums[i];
-		}
-		System.out.println("\nEl producto de los números es " + total);
-		
 	}
 }
+
+
+
 
 
 

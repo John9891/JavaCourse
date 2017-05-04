@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledEditorKit;
 
 //import graficos.LaminaProcesador.GestionarEventos;
@@ -37,6 +38,9 @@ class LaminaProcesadorII extends JPanel{
 		setLayout(new BorderLayout());
 		JPanel laminaMenu = new JPanel();
 		add(laminaMenu, BorderLayout.NORTH);
+		JPanel laminaTexto = new JPanel();
+		add(laminaTexto, BorderLayout.CENTER);
+		laminaTexto.setLayout(new BorderLayout());
 		
 		JMenuBar BarraMenu1 = new JMenuBar();		
 		laminaMenu.add(BarraMenu1);
@@ -63,8 +67,9 @@ class LaminaProcesadorII extends JPanel{
 		ConfMenuTam("24", 24,grupoTamagno,KeyEvent.VK_D);			
 		
 		Area1 = new JTextPane();		
-		add(Area1);			
+		laminaTexto.add(Area1,BorderLayout.CENTER);	
 		
+		//Emergent menu
 		JPopupMenu Emergente = new JPopupMenu();
 		JMenuItem NegritaE = new JMenuItem("Negrita");
 		JMenuItem CursivaE = new JMenuItem("Cursiva");		
@@ -72,8 +77,32 @@ class LaminaProcesadorII extends JPanel{
 		Emergente.add(CursivaE);		
 		Area1.setComponentPopupMenu(Emergente);
 		NegritaE.addActionListener(new StyledEditorKit.BoldAction());
-		CursivaE.addActionListener(new StyledEditorKit.ItalicAction());	
+		CursivaE.addActionListener(new StyledEditorKit.ItalicAction());
+		
+		//Toolbar
+		barra = new JToolBar();
+		barra.setOrientation(1);	//Vertical orientation
+		laminaTexto.add(barra, BorderLayout.WEST);		
+		ConfBarHer("src/graficos/negrita.jpg").addActionListener(new StyledEditorKit.BoldAction());
+		ConfBarHer("src/graficos/cursiva.jpg").addActionListener(new StyledEditorKit.ItalicAction());
+		ConfBarHer("src/graficos/subraya.jpg").addActionListener(new StyledEditorKit.UnderlineAction());
+		barra.addSeparator();
+		ConfBarHer("src/graficos/azul.gif").addActionListener(new StyledEditorKit.ForegroundAction("azul", Color.BLUE));
+		ConfBarHer("src/graficos/amarillo.gif").addActionListener(new StyledEditorKit.ForegroundAction("amarillo", Color.YELLOW));
+		ConfBarHer("src/graficos/rojo.gif").addActionListener(new StyledEditorKit.ForegroundAction("rojo", Color.RED));
+		barra.addSeparator();
+		ConfBarHer("src/graficos/izquierda.png").addActionListener(new StyledEditorKit.AlignmentAction("izquierda", StyleConstants.ALIGN_LEFT));
+		ConfBarHer("src/graficos/centrada.jpg").addActionListener(new StyledEditorKit.AlignmentAction("izquierda", StyleConstants.ALIGN_CENTER));
+		ConfBarHer("src/graficos/derecha.jpg").addActionListener(new StyledEditorKit.AlignmentAction("izquierda", StyleConstants.ALIGN_RIGHT));
+		ConfBarHer("src/graficos/justificada.png").addActionListener(new StyledEditorKit.AlignmentAction("justificada", StyleConstants.ALIGN_JUSTIFIED));
+	}		
+
+	public JButton ConfBarHer(String ruta){		
+		JButton boton = new JButton(new ImageIcon(ruta));
+		barra.add(boton);				
+		return boton;
 	}
+
 	
 	public void ConfMenuEstilo(String rotulo, String icono, ActionListener oyente, int atajo){
 		JCheckBoxMenuItem elemento = new JCheckBoxMenuItem("Negrita",new ImageIcon(icono));
@@ -105,6 +134,8 @@ class LaminaProcesadorII extends JPanel{
 	private JTextPane Area1;
 	private JMenu MenuTipo, MenuEstilo, MenuTamagno;
 	private Font fuenteActual, fuente2;
-			
+	//private JButton botonNegrita, botonCursiva, botonSubraya, botonAzul, botonAmarillo, botonRojo, botonIzq,
+	//botonCent, botonDer, botonJust;
+	private JToolBar barra;
 	
 }
