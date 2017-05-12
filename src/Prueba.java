@@ -7,29 +7,14 @@ public class Prueba {
 	
 	public static void main(String[] args) throws Exception{		
 		
-		int num = 4;
-		long resultado = sumaFibonacci(num);
-		System.out.println("La suma de los primeros " + num + " numeros es " + resultado);
+		int a = 1;
+		int b = 5;
+		int centro = a+b/2;
+		System.out.println(centro);
 				
 	}
 	
-	static long sumaFibonacci (int n){
-		
-		if(n==1){
-			return 1;
-		}	
-	else{
-		int inf = 0;
-		int sup = 1;
-		int x;
-		for(int i=2; i<=n; i++){
-			x=inf;
-			inf=sup;
-			sup=x+inf;
-		}		
-		return sup;
-		}
-	}
+	
 }
 
 
